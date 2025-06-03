@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ağ Trafiği Anomali Tespiti</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h2>🌐 Ağ Trafiği Anomali Tespiti</h2>
+
+    <form action="/tahmin" method="post">
+        <label>Flow Duration:</label>
+        <input type="number" name="Flow Duration" step="any" required>
+
+        <label>Total Fwd Packets:</label>
+        <input type="number" name="Total Fwd Packets" step="any" required>
+
+        <label>Total Backward Packets:</label>
+        <input type="number" name="Total Backward Packets" step="any" required>
+
+        <label>Total Length of Fwd Packets:</label>
+        <input type="number" name="Total Length of Fwd Packets" step="any" required>
+
+        <label>Total Length of Bwd Packets:</label>
+        <input type="number" name="Total Length of Bwd Packets" step="any" required>
+
+        <input type="submit" value="Tahmin Et">
+    </form>
+
+    <button type="button" onclick="doldur()">🔁 Örnek Verileri Doldur</button>
+
+    {% if prediction %}
+        <h3 class="{% if prediction == 'BENIGN' %}benign{% else %}attack{% endif %}">
+            🔍 Sonuç: {{ prediction }}
+        </h3>
+    {% endif %}
+
+    {% if history %}
+        <h4>📜 Tahmin Geçmişi:</h4>
+        <ul>
+            {% for h in history %}
+                <li>{{ h }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <script>
+        function doldur() {
+            const ornekVeri = {
+                "Flow Duration": 200000,
+                "Total Fwd Packets": 500,
+                "Total Backward Packets": 500,
+                "Total Length of Fwd Packets": 40000,
+                "Total Length of Bwd Packets": 30000
+            };
+            for (let key in ornekVeri) {
+                document.querySelector(`input[name='${key}']`).value = ornekVeri[key];
+            }
+        }
+    </script>
+
+</body>
+</html>
