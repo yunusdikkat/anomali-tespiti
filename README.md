@@ -76,11 +76,6 @@ Formu doldurarak tahmin yapabilir veya “🔁 Örnek Verileri Doldur” butonun
 
 ---
 
-## 🖼 Arayüz Ekran Görüntüsü
-
-> ![arayüz](docs/preview.png) *(isteğe bağlı ekran görüntüsü eklenecekse bu dosyayı `docs/` altına koy)*
-
----
 
 ## 🧪 Test Sonuçları
 
